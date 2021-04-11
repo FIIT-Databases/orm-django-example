@@ -1,8 +1,6 @@
-from enum import Enum
-
 from django.db import models
 from django.utils import timezone
-from django_enum_choices.fields import EnumChoiceField
+from django.utils.translation import gettext as _
 
 from apps.core.managers import BaseManager
 
@@ -51,19 +49,19 @@ class Party(BaseModel):
         db_table = 'parties'
         app_label = 'core'
 
-    class PartyEnum(Enum):
-        NAZI = 'nazi'
-        LIBERAL = 'liberals'
-        POPULIST = 'populists'
-        COMMUNIST = 'communists'
-        CONSERVATIVES = 'conservatives'
-        SOCIALISTS = 'socialists'
-        NATIONALISTS = 'nationalists'
-        DEMOCRATS = 'democrats'
+    class PartyEnum(models.TextChoices):
+        NAZI = 'nazi', _('nazi')
+        LIBERAL = 'liberals', _('liberals')
+        POPULIST = 'populists', _('populists')
+        COMMUNIST = 'communists', _('communists')
+        CONSERVATIVES = 'conservatives', _('conservatives')
+        SOCIALISTS = 'socialists', _('socialists')
+        NATIONALISTS = 'nationalists', _('nationalists')
+        DEMOCRATS = 'democrats', _('democrats')
 
     name = models.CharField(max_length=200, unique=True)
     color = models.CharField(max_length=15, null=True)
-    type = EnumChoiceField(PartyEnum, null=True)
+    type = models.CharField(PartyEnum, null=True, choices=PartyEnum.choices, max_length=100)
     founded_at = models.DateField(null=True)
 
     def __str__(self) -> str:
@@ -107,16 +105,3 @@ class GovernmentMember(BaseModel):
 
     def __str__(self):
         return f"{self.member} is member of {self.government} for party {self.party} as {self.role}"
-
-
-class InboxMessage(BaseModel):
-    class Meta:
-        db_table = 'inbox'
-        app_label = 'core'
-
-    member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='messages')
-    title = models.CharField(max_length=100)
-    author = models.CharField(max_length=100)
-    is_fake = models.BooleanField(default=False)
-    published_at = models.DateTimeField()
-

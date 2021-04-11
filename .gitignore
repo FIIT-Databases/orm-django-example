@@ -5,8 +5,10 @@
 *.log
 __pycache__
 .pytest_cache/
-log
-!log/.gitkeep
+log/
+!/log/.gitkeep
+.env
 
 # Project exclude paths
 /venv/
+*.mwb.bak
