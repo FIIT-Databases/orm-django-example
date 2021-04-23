@@ -13,9 +13,8 @@ def select_all() -> List[Member]:
     Select all users in table members using model Member
     :return:
     """
-
-    members = Member.objects.all()
-    return members
+    result = Member.objects.all()
+    return result
 
 
 def select_one() -> Member:
@@ -30,13 +29,12 @@ def select_one() -> Member:
     return member
 
 
-def select_first() -> Member:
+def select_first() -> Party:
     """
     Select first record from table parties
     :return:
     """
-    party = Party.objects.first()
-    return party
+    return Party.objects.first()
 
 
 def select_youngest() -> Member:
@@ -44,8 +42,7 @@ def select_youngest() -> Member:
     Select the youngest member of parliament ever
     :return:
     """
-    member = Member.objects.order_by('-born_at').first()
-    return member
+    return Member.objects.order_by('-born_at').first()
 
 
 def create_party() -> Party:
@@ -87,18 +84,17 @@ def most_experienced_member() -> Member:
 
 def communists_or_socialists() -> List[Party]:
     """
-    Select all parties where type is SOCIALISTS or LIBERAL
+    Select all parties where type is SOCIALISTS or COMMUNIST
     :return:
     """
-    parties = Party.objects.filter(
+    # WHERE type in ('socialist', 'communist)
+    Party.objects.filter(
         type__in=[Party.PartyEnum.SOCIALISTS, Party.PartyEnum.COMMUNIST]
     )
-
-    parties = Party.objects.filter(
+    # WHERE type = 'socialist' OR type = 'communist'
+    return Party.objects.filter(
         Q(type=Party.PartyEnum.SOCIALISTS) | Q(type=Party.PartyEnum.COMMUNIST)
     )
-
-    return parties
 
 
 def communists_or_socialists_with_robo() -> List[Party]:

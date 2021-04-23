@@ -105,3 +105,13 @@ class GovernmentMember(BaseModel):
 
     def __str__(self):
         return f"{self.member} is member of {self.government} for party {self.party} as {self.role}"
+
+
+class Inbox(BaseModel):
+    class Meta:
+        db_table = 'inbox'
+        app_label = 'core'
+
+    member = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='messages')
+    subject = models.CharField(max_length=100)
+    content = models.TextField()
