@@ -48,6 +48,9 @@ class Party(BaseModel):
     class Meta:
         db_table = 'parties'
         app_label = 'core'
+        unique_together = (
+            ('name', 'color')
+        )
 
     class PartyEnum(models.TextChoices):
         NAZI = 'nazi', _('nazi')
