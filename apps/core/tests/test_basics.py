@@ -8,7 +8,7 @@ from apps.core.examples import basics
 from apps.core.models import Member, Party
 
 
-class AnimalTestCase(TestCase):
+class ORMTestCase(TestCase):
     fixtures = ['apps/core/fixtures/initial.json']
 
     @override_settings(DEBUG=True)
