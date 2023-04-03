@@ -87,10 +87,7 @@ class ORMTestCase(TestCase):
     def test_party_type_for_mazurek(self):
         self.assertEqual(
             Party.PartyEnum.NAZI,
-            Party.objects.filter(
-                government_members__member__name='Milan',
-                government_members__member__surname='Mazurek'
-            ).values_list('type', flat=True)[0]
+            basics.party_type_for_mazurek()
         )
 
     @override_settings(DEBUG=True)

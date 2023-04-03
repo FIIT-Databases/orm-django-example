@@ -115,9 +115,12 @@ def best_tourist() -> Member:
 
 
 def party_type_for_mazurek() -> str:
-    return Party.objects.filter(
+    result = Party.objects.filter(
         government_members__member__name='Milan',
-        government_members__member__surname='Mazurek').values_list('type', flat=True)[0]
+        government_members__member__surname='Mazurek'
+    ).values_list('type', flat=True)[0]
+
+    return result
 
 
 def disco_members() -> List[Member]:
