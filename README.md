@@ -1,45 +1,45 @@
 # Django ORM example
 
-Tento repozitá prezentuje fungovanie ORM architektonického vzoru na príklade
-Django ORM.
+This repository demonstrates the use of SQLAlchemy ORM, which use the
+[active record](https://en.wikipedia.org/wiki/Active_record_pattern) pattern as architectural design.
 
-Príklad je postavený na dátovom modeli znázornenom na obrázku nižšie. Na naplnenie datasetu sme použíli
-voľne prístupné dáta z [data.gov.sk](https://data.gov.sk/), ktoré mapujú zloženie parlamentu počas fungovania
-samostatnej Slovenskej republiky (od roku 1993).
+The example is based on the data model shown in the figure below. To populate the dataset we used freely available
+data from [data.gov.sk](https://data.gov.sk/), which maps the composition of the parliament during the independent
+Slovak Republic (since 1993).
 
-Príklady sa nachádzajú v priečinku `apps/core/examples`. Nevyplnená verzia sa nachádza v branci `empty`.
+Examples are located in the `apps/core/examples` folder. The unfilled version is located in the `presentation` branch.
 
-Projekt používa [poetry](https://python-poetry.org/) ako balíčkovací systém. Príklad konfiguračného súboru, sa
-náchádza v súbore `.env.example`. Kompletná inštalácia ne Linuxe, môže vyzerať napríklad takto:
+The project uses [poetry](https://python-poetry.org/) as a packaging system. An example configuration file, with
+can be found in the `.env.example` file. A complete Linux installation might look like this, for example:
 
 ```shell
-# Stiahnutie projekty
-git clone https://github.com/Sibyx/fiit-orm-django-example.git orm_example
+# Clone the repository
+git clone https://github.com/FIIT-Databases/orm-django-example.git orm_example
 cd orm_example
 
-# Vytvorenie virtuálneho prostredia a instalacia zavislosti
+# Set up Python virtual environment and install dependencies
 python -m venv venv
 source venv/bin/activate
 poetry install
 
-# Vytvorenie konfiguracie
+# Create configuration
 cp .env.example .env
 vim .env
 
-# Spustenie migracii
+# Execute database migrations
 python manage.py migrate
 
-# Stiahnutie aktuálnyc informácií o rozložení parlamentu
-# šikovní skauti sa chcú pozrieť do apps/core/management/commands/seed.py
+# Download up-to-date information on the distribution of parliament
+# Good frogs wanna see check apps/core/management/commands/seed.py
 python manage.py seed
 
-# Spustenie testov
+# Execute tets
 python manage.py test
 ```
 
-## Databáza
+## Database
 
 ![](docs/eer.png)
 
 ---
-S ❤️ FIIT STU
+With ❤️ FIIT STU
